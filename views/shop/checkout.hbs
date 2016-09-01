@@ -1,0 +1,11 @@
+<h1> Check out </h1>
+<h4> Your total : Rs{{ total }} </h4>
+<form action="/checkout" method="post" id="checkout-form">
+  Name:<br>
+  <input type="text" id="name" class="form-control" required name="name">
+  <br>
+  Address:<br>
+  <input type="text" id="address" class="form-control" required name="address">
+ <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+<button type="submit" class="btn btn-success">Place orders </button>
+</form>
