@@ -13,6 +13,13 @@ var Pers = require('../models/personal');
 var Bev = require('../models/bevarages');
 var Cart = require('../models/cart');
 var Order = require('../models/order');
+var ac= require('../models/ac');
+var acparts = require('../models/acparts');
+var acp2 = require('../models/acp2');
+var acp3= require('../models/acp3');
+var acp4= require('../models/acp4');
+var acp5= require('../models/acp5');
+
 
 router.get('/',function(req, res, next){
 var successMsg = req.flash('success')[0];
@@ -26,37 +33,6 @@ res.render('loaderio-fbd01aa2261cff11e16c283826d59af3.txt');
 
 });
 
-router.get('/ss',function(req,res){
-console.log("search ");
-
-var item_template='';
-var query=document.getElementById('query').value;
-var hostname=window.location.hostname;
-$.getJSON("http://"+hostname+":9200/shopping/_search?q=Name:"+query,function(results){
-console.log(results);
-document.getElementById('heading').innerHTML=results.hits.total+" items found";
-if(results.hits.total>0){
- var items =results.hits.hits;
- for(var i in items){
- var cat=items[i]._type;
- var prodId=`${cat}_${items[i]._source.Name}_${items[i]._source.Quantity}`;
-  item_template += `<div class="col-md-4"  id="${cat}_${items[i].Name}_${items[i].Quantity}">  <h2>${items[i]._source.Name}</h2>
-                                        <a href="javascript:addtocart('{$i}')" > <img height="150px" width="150px" src="./img/${cat}/${items[i]._source.Name}.jpg" /></$
-                                        <p> ${items[i]._source.Price}<p>
-                                        <p>(${items[i]._source.Quantity})<p>
-                                         <button id="${items[i]._source.id}" class="btn btn-success" onclick="add('${items[i]._source.id}')" value="Add to cart" >Add t$
-                                        </div>`
-
-}
-document.getElementById('list').innerHTML=item_template;
-
-
-}
-else
-document.getElementById('list').innerHTML='';
-});
-
-});
 
 
 /* GET home page. */
@@ -65,7 +41,7 @@ router.get('/shop/prod', function(req, res, next) {
  var productChunks = [];
  var chunkSize = 3;
  for( var i=0; i < docs.length; i += chunkSize){
-	productChunks.push(docs.slice(i, i + chunkSize));
+productChunks.push(docs.slice(i, i + chunkSize));
 }
  res.render('prod/index', { title: 'BoomBasket' ,products: docs });
 });
@@ -78,9 +54,10 @@ router.get('/shop/pers', function(req, res, next) {
  for( var i=0; i < docs.length; i += chunkSize){
         productChunks.push(docs.slice(i, i + chunkSize));
 }
- res.render('pers/index', { title: 'BoomBasket' ,products: docs });
+ res.render('pers/index', { title: 'BoomBasket' ,products: docs});
 });
 });
+
 
 
 router.get('/shop/bev', function(req, res, next) {
@@ -94,21 +71,75 @@ router.get('/shop/bev', function(req, res, next) {
 });
 });
 
-
-router.get('/plusaddtocart/:id',function(req,res,next){
-        var productId= req.params.id;
-        var cart = new Cart(req.session.cart ? req.session.cart : {});
-
-        Product.findById(productId, function(err, product){
-        if(err){
-                return res.redirect('/');
-        }
-        cart.plus(product, product.id);
-        req.session.cart= cart;
-        res.redirect('/shop/checkout');
-        });
+router.get('/shop/ac', function(req, res, next) {
+  ac.find(function(err,docs){
+ var productChunks = [];
+ var chunkSize = 3;
+ for( var i=0; i < docs.length; i += chunkSize){
+        productChunks.push(docs.slice(i, i + chunkSize));
+}
+ res.render('ac/index', { title: 'BoomBasket' ,products: docs});
+});
 });
 
+router.get('/acparts', function(req, res, next) {
+acparts.find(function(err,docs){
+ var productChunks = [];
+ var chunkSize = 3;
+ for( var i=0; i < docs.length; i += chunkSize){
+        productChunks.push(docs.slice(i, i + chunkSize));
+}
+ res.render('ac/parts', { title: 'BoomBasket' ,products: docs});
+
+ });
+});
+
+
+
+router.get('/acp2', function(req, res, next) {
+acp2.find(function(err,docs){
+ var productChunks = [];
+ var chunkSize = 3;
+ for( var i=0; i < docs.length; i += chunkSize){
+        productChunks.push(docs.slice(i, i + chunkSize));
+}
+ res.render('ac/acp2', { title: 'BoomBasket' ,products: docs});
+
+ });
+});
+router.get('/acp3', function(req, res, next) {
+acp3.find(function(err,docs){
+ var productChunks = [];
+ var chunkSize = 3;
+ for( var i=0; i < docs.length; i += chunkSize){
+        productChunks.push(docs.slice(i, i + chunkSize));
+}
+ res.render('ac/acp3', { title: 'BoomBasket' ,products: docs});
+
+ });
+});
+router.get('/acp4', function(req, res, next) {
+acp4.find(function(err,docs){
+ var productChunks = [];
+ var chunkSize = 3;
+ for( var i=0; i < docs.length; i += chunkSize){
+        productChunks.push(docs.slice(i, i + chunkSize));
+}
+ res.render('ac/acp4', { title: 'BoomBasket' ,products: docs});
+
+ });
+});
+router.get('/acp5', function(req, res, next) {
+acp5.find(function(err,docs){
+ var productChunks = [];
+ var chunkSize = 3;
+ for( var i=0; i < docs.length; i += chunkSize){
+        productChunks.push(docs.slice(i, i + chunkSize));
+}
+ res.render('ac/acp5', { title: 'BoomBasket' ,products: docs});
+
+ });
+});
 
 
 router.get('/addtocart/:id',function(req,res,next){
@@ -120,11 +151,17 @@ router.get('/addtocart/:id',function(req,res,next){
 		return res.redirect('/');
 	}
 	cart.add(product, product.id);
+	
+	//cart.totalPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+	console.log(cart.totalPrice);
 	req.session.cart= cart;
 	console.log(req.session.cart);
+	console.log("cam to addtocart");
 	res.redirect('/shop/prod');
 	});
 });
+
+
 
 router.get('/addtopcart/:id',function(req,res,next){
         var productId= req.params.id;
@@ -134,12 +171,14 @@ router.get('/addtopcart/:id',function(req,res,next){
         if(err){
                 return res.redirect('/');
         }
-        cart.add(product, product.id);
-        req.session.cart= cart;
+	cart.add(product,product.id);
+//	cart.totalPrice=cart.totalPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, 'Rs.1,');
+         req.session.cart= cart;
         console.log(req.session.cart);
-        res.redirect('/shop/pers');
+	      res.redirect('/shop/pers' );
         });
 });
+
 router.get('/addtobcart/:id',function(req,res,next){
         var productId= req.params.id;
         var cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -149,12 +188,104 @@ router.get('/addtobcart/:id',function(req,res,next){
                 return res.redirect('/');
         }
         cart.add(product, product.id);
+//	cart.totalPrice=cart.totalPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, 'Rs.1,');
         req.session.cart= cart;
         console.log(req.session.cart);
         res.redirect('/shop/bev');
         });
 });
 
+router.get('/addtoaccart/:id',function(req,res,next){
+        var productId= req.params.id;
+        var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        ac.findById(productId, function(err, product){
+        if(err){
+                return res.redirect('/');
+        }
+	cart.add(product, product.id);
+//	cart.totalPrice=cart.totalPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, 'Rs.1,');
+        req.session.cart= cart;
+        console.log(req.session.cart);
+        res.redirect('/shop/ac');
+        });
+});
+
+
+router.get('/addtop1cart/:id',function(req,res,next){
+        var productId= req.params.id;
+        var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        acparts.findById(productId, function(err, product){
+        if(err){
+                return res.redirect('/');
+        }
+	cart.add(product, product.id);
+//	cart.totalPrice=cart.totalPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, 'Rs.1,');
+        req.session.cart= cart;
+        console.log(req.session.cart);
+        res.redirect('/acparts');
+        });
+});
+
+router.get('/addtop2cart/:id',function(req,res,next){
+        var productId= req.params.id;
+        var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        acp2.findById(productId, function(err, product){
+        if(err){
+                return res.redirect('/');
+        }
+	cart.add(product, product.id);
+//	cart.totalPrice=cart.totalPrice.toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, 'Rs.1,');
+        req.session.cart= cart;
+        console.log(req.session.cart);
+        res.redirect('/acp2');
+        });
+});
+
+router.get('/addtop3cart/:id',function(req,res,next){
+        var productId= req.params.id;
+        var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        acp3.findById(productId, function(err, product){
+        if(err){
+                return res.redirect('/');
+        }
+        cart.add(product, product.id);
+        req.session.cart= cart;
+        console.log(req.session.cart);
+        res.redirect('/acp3');
+        });
+});
+router.get('/addtop4cart/:id',function(req,res,next){
+        var productId= req.params.id;
+        var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        acp4.findById(productId, function(err, product){
+        if(err){
+                return res.redirect('/');
+        }
+        cart.add(product, product.id);
+        req.session.cart= cart;
+        console.log(req.session.cart);
+        res.redirect('/acp4');
+        });
+});
+router.get('/addtop5cart/:id',function(req,res,next){
+        var productId= req.params.id;
+        var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+        acp5.findById(productId, function(err, product){
+        if(err){
+                return res.redirect('/');
+        }
+        cart.add(product, product.id);
+        req.session.cart= cart;
+        console.log(req.session.cart);
+        res.redirect('/acp5');
+        });
+});
 
 router.get('/shoppingcart', function(req, res, next){
 	if(!req.session.cart){
@@ -163,6 +294,14 @@ router.get('/shoppingcart', function(req, res, next){
 	var cart = new Cart(req.session.cart);	
 	res.render('shop/shoppingcart', {products: cart.generateArray(),totalPrice: cart.totalPrice});
 
+});
+
+router.get('/increase/:id',function(req,res,next){
+	var productId= req.params.id;
+	var cart = new Cart(req.session.cart ? req.session.cart : {});
+	cart.increase(productId);
+	req.session.cart=cart;
+	res.redirect('/shoppingcart');
 });
 
 router.get('/checkout',isLoggedIn,function(req,res,next){

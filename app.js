@@ -18,7 +18,7 @@ var routes = require('./routes/index');
 var userRoutes= require('./routes/user'); 
 
 var app = express();
-mongoose.connect('52.10.173.236:27017/shopping');
+mongoose.connect('52.41.26.3:27017/shopping');
 require('./config/passport');
 // view engine setup
 app.engine('.hbs',expressHbs({defaultLayout: 'layout',extname:'.hbs'}));

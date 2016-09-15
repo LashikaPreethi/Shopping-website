@@ -1,52 +1,77 @@
 var Product = require('../models/bevarages.js');
 
 var mongoose = require('mongoose');
-mongoose.connect('52.35.107.170:27017/shopping');
+mongoose.connect('52.38.138.134:27017/shopping');
 var products = [
-        new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/102833_2-cadbury-bournvita-health-drink.jpg',
-        title:'Cadbury',
-        price:200
+   new Product({
+        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/281167_1-gino-toschi-vinegar-white-wine.jpg',
+        title:'Wine',
+        price:220
 }),
-         new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/266569_4-red-label-tea.jpg',
-        title:'Brooke bond',
-        price:185
-}),
- new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/186070_1-cothas-coffee-speciality-blend-of-coffee-and-chicory-powder.jpg',
-        title:'Cothas',
-        price:210
+   	 new Product({
+        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/70001123_1-badia-wine-vinegar-merlot-sweet.jpg',
+        title:'Wine',
+        price:565
 }),
  new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/100401162_1-coca-cola-coke-diet.jpg',
-        title:'Coca cola',
-        price:35
+	imagePath: 'http://www.bigbasket.com/media/uploads/p/l/40003572_2-colavita-vinegar-red-wine-product-of-italy.jpg',
+        title:'Wine',
+        price:290
 }),
- new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/40078473_1-horlicks-health-nutrition-drink-cardia-plus-vanilla.jpg',
-        title:'Horlicks',
-        price:650
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/40070741_1-tropicana-delight-fruit-juice-mixed-fruit.jpg',
+        title:'Tropicana',
+        price:18
 }),
- new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/40082854_1-protinex-nutritional-supplement-lock-seal-diabetes.jpg',
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/265688_3-tropicana-delight-fruit-juice-litchi.jpg',
+        title:'Tropicana',
+        price:18
+}),
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/305792_5-protinex-high-protein-nutritional-supplement-vanilla-flavor.jpg',
         title:'Protinex',
-        price:675
+        price:450
 }),
- new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/100012281_2-red-bull-energy-drink.jpg',
-        title:'Red bull',
-        price:97
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/290192_8-bru-gold-instant-coffee.jpg',
+        title:'Bru',
+        price:99
 }),
- new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/20005379_3-pediasure-complete-balanced-premium-chocolate.jpg',
-        title:'Pediasure',
-        price:500
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/274037_1-appy-apple-juice-drink-classic.jpg',
+        title:'Appy',
+        price:10
 }),
- new Product({
-        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/263574_9-tata-tea-life-tulsi-brahmi-cardamom-ginger.jpg',
-        title:'Tata',
-        price:101
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/119401_9-horlicks-junior-health-nutrition-drink-original-flavor-stage-2-4-6-years.jpg',
+        title:'Horlicks',
+        price:255
+}),
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/251014_2-thums-up-soft-drink.jpg',
+        title:'Coca cola',
+        price:38
+}),
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/103246_2-aquafina-packaged-drinking-water.jpg',
+        title:'Aquafina',
+        price:33
+}),
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/281594_4-3-roses-tea-natural-care.jpg',
+        title:'3 roses',
+        price:143
+}),
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/267400_2-nescafe-coffee-classic.jpg',
+        title:'Nescafe',
+        price:120
+}),
+new Product({
+    imagePath: 'http://www.bigbasket.com/media/uploads/p/l/257034_5-hersheys-syrup-chocolate.jpg',
+        title:'Hersheys',
+        price:200
 })
 ];
 

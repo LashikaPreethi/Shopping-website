@@ -1,12 +1,23 @@
-<h1>
-hello {{ name }}
-</h1>
+<div class="row">
+<div class="col-md-8 col-md-offset-2">
+	<h1> Hello {{name}}</h1>
+	<hr>
+	<h2>Your Orders</h2>
+	{{#each orders }}
+	<div class="panel panel-default">
 
-<h1> Your orders  </h1>
-
-<h4> Delivery Address: {{address}} </h4>
-<h4> Items: {{items}} </h4>
-<h4> Total Price: {{totalPrice}} </h4>
-<h4> Total Qty: {{totalQty}} </h4> 
-
-
+  <div class="panel-body">
+<ul class="list-group">
+{{#each this.items }}
+  <li class="list-group-item">
+    <span class="badge">{{this.price}}</span>
+    {{ this.item.title }} | {{this.qty }}
+  </li>
+{{/each}}
+</ul>
+</div>
+<div class="panel-footer">Rs. {{this.cart.totalPrice}}</div>
+</div>
+{{/each}}
+</div>
+</div>

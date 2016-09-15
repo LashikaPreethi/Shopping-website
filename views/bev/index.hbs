@@ -1,3 +1,4 @@
+
 <div class="page-header">Bevarages<div>
 <div class="row">
 
@@ -9,7 +10,17 @@
       <div class="caption">
         <h3> {{ title }}</h3>
         <div class="clearfix">
-        <div class="price"> {{ price }} </div>
+        <div id='{{ _id }}' class="price"> &#8377; {{ price }} 
+<script> var price={{price}}+'';
+         if(price.length>3){
+         var lastThree = price.substring(price.length-3);
+         var otherNumbers = price.substring(0,price.length-3);
+         if(otherNumbers != '')
+                lastThree= ',' +lastThree;
+         var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g,",") + lastThree;
+         document.getElementById('{{ _id }}').innerHTML='&#8377;'+res;}</script>
+
+</div>
         <a href="/addtobcart/{{ this._id}}" class="btn btn-primary pull-right   " role="button">Add to cart</a>
 </div>
 </div>

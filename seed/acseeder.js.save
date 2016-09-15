@@ -1,0 +1,29 @@
+var Product = require('../models/ac.js');
+
+var mongoose = require('mongoose');
+mongoose.connect('52.38.138.134:27017/shopping');
+var products = [
+   new Product({
+        imagePath: 'http://www.bigbasket.com/media/uploads/p/l/281167_1-gino-toschi-vinegar-white-wine.jpg',
+        title:'Wine',
+        price:220
+}),
+
+];
+
+var done=0;
+for(var i=0; i<products.length; i++){
+        products[i].save(function(err, result){
+        done++;
+if(done == products.length){
+        exit();
+        }
+});
+}
+
+function exit(){
+
+mongoose.disconnect();
+
+}
+

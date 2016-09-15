@@ -1,5 +1,15 @@
 <h1> Check out </h1>
-<h4> Your total : Rs{{ total }} </h4>
+<h4 id='total'> Your total : &#8377; {{ total }} </h4>
+<script> var price ={{total}}+'';
+         if(price.length>3){
+         var lastThree = price.substring(price.length-3);
+         var otherNumbers = price.substring(0,price.length-3);
+         if(otherNumbers != '')
+                lastThree= ',' +lastThree;
+         var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g,",") + lastThree;
+         document.getElementById('total').innerHTML='&#8377; '+res;}</script>
+
+
 <form action="/checkout" method="post" id="checkout-form">
   Name:<br>
   <input type="text" id="name" class="form-control" required name="name">

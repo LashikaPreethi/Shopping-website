@@ -1,4 +1,3 @@
-
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -8,4 +7,6 @@ var schema = new Schema({
         price: {type: Number, required: true}
 });
 
-module.exports= mongoose.model('Bevarages', schema);
+module.exports= mongoose.model('Aircrafts', schema);
+
+
